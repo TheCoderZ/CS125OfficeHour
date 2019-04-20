@@ -31,6 +31,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/cs125" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="121dp"
+                android:layout_height="63dp"
+                android:text="Request TA"
+                tools:layout_editor_absoluteX="145dp"
+                tools:layout_editor_absoluteY="476dp" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="TA? Click Here"
+                tools:layout_editor_absoluteX="145dp"
+                tools:layout_editor_absoluteY="395dp" />
+
         </android.support.constraint.ConstraintLayout>
 
     </LinearLayout>
