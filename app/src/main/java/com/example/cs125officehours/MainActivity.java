@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
-
         myRef.setValue("CS");
     }
 
@@ -34,5 +33,15 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "Button clicked!");
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+    }
+    public void openStudentInterface(View view) {
+        Log.d(LOG_TAG, "Button Clicked");
+        Intent openStudent = new Intent(this, StudentActivity.class);
+        startActivity(openStudent);
+    }
+    public void openStaff(View view) {
+        Log.d(LOG_TAG,"Button Clicked");
+        Intent openStaff = new Intent(this, StaffActivity.class);
+        startActivity(openStaff);
     }
 }
