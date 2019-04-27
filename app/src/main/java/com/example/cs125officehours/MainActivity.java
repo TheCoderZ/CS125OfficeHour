@@ -34,4 +34,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
+
+    public void openStudent(View view) {
+        Log.d(LOG_TAG, "Button clicked!");
+        Intent intent = new Intent(this, StudentActivity.class);
+        startActivity(intent);
+    }
 }

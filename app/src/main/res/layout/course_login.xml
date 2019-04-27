@@ -46,6 +46,7 @@
         android:layout_marginRight="162dp"
         android:background="@android:color/holo_green_light"
         android:text="@string/login_button"
+        android:onClick="signIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText2" />
