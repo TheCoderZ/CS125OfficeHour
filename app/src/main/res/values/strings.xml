@@ -11,4 +11,6 @@
     <string name="ta_done">GO OFFLINE</string>
     <string name="request_TA">REQUEST A TA</string>
     <string name="go_back">Go Back</string>
+    <string name="name">Name</string>
+
 </resources>

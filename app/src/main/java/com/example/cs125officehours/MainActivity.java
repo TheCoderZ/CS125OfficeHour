@@ -15,6 +15,8 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG =
             MainActivity.class.getSimpleName();
+    private DatabaseReference mDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
 
-        myRef.setValue("CS");
     }
 
     public void onClick(View view) {
@@ -40,4 +41,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, StudentActivity.class);
         startActivity(intent);
     }
+
+
 }
