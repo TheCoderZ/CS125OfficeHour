@@ -22,7 +22,7 @@ public class StudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_interface);
         mEdit = (EditText)findViewById(R.id.editText3);
-        mEdit.getText().toString();
+        //mEdit.getText().toString();
 
     }
 
