@@ -35,9 +35,9 @@ public class StudentActivity extends AppCompatActivity {
 
     public void send(View view) {
         mButton = (Button)findViewById(R.id.request_TA);
+        name = mEdit.getText().toString();
         mButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                name = mEdit.getText().toString();
                 if (name != "") {
                     writeNewStudent(name, name, name);
                     TextView textView = findViewById(R.id.textView2);
@@ -46,12 +46,17 @@ public class StudentActivity extends AppCompatActivity {
                 }
             }
         });
+        //System.out.println(mDatabase.child("Students").child(name).getKey());
+       /* while(mDatabase.child(user.username).child("match").) {
+
+        }*/
     }
 
     private void writeNewStudent(String userId, String name, String email) {
         user = new Student(name, email);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Student").child(userId).setValue(user);
+        mDatabase.orderByKey();
     }
 
     private void seek(String name) {
@@ -71,7 +76,7 @@ public class StudentActivity extends AppCompatActivity {
         //postListener.onDataChange();
         System.out.println(mDatabase.child("Student").child(name).child("match").addValueEventListener(postListener));
         //System.out.println(dbSt)
-        while (!user.match) {
+        //while (!user.match) {
             /*final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -81,6 +86,6 @@ public class StudentActivity extends AppCompatActivity {
                 }
             }, 5000);*/
             //System.out.println("hello");
-        }
+        //}
     }
 }

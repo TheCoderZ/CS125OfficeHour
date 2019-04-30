@@ -1,6 +1,8 @@
 package com.example.cs125officehours;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,7 +27,7 @@ public class StaffActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     public Button mButton;
     EditText mEdit;
-    TextView mText;
+    TextView textView;
 
 
 
@@ -39,7 +41,7 @@ public class StaffActivity extends AppCompatActivity {
         mEdit = (EditText)findViewById(R.id.editText);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ta_interface);
-
+        textView = findViewById(R.id.textView4);
     }
 
     private void checker() {
@@ -55,19 +57,33 @@ public class StaffActivity extends AppCompatActivity {
         System.out.println(Staff.email);
         //System.out.println(students);
         mButton = (Button)findViewById(R.id.ta_done);
-        students.addValueEventListener(new ValueEventListener() {
+        students.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                for (final DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    Student student = postSnapshot.getValue(Student.class);
                     //System.out.println(postSnapshot.getKey());
                     //TimeUnit.SECONDS.to;
-                    Student student = postSnapshot.getValue(Student.class);
-                    if (student.match) {
-                        continue;
+                    if (!student.match) {
+                        //student.match = true;
+                        mDatabase.child(student.username).child("match").setValue(true);
+                        System.out.println(student.match);
+                        textView.setText("Matched with: " + student.username);
+                        textView.setVisibility(View.VISIBLE);
+                        break;
                     }
-                    student.match = true;
-                    mDatabase.child(student.username).child("match").setValue(true);
-                    System.out.println(student.match);
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Do something after 5s = 5000ms
+                            //buttons[inew][jnew].setBackgroundColor(Color.BLACK);
+
+
+                        }
+                    }, 5000);
+
+
                     /*try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
@@ -86,16 +102,63 @@ public class StaffActivity extends AppCompatActivity {
             }
 
 
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        /*students.addValueEventListener(new ValueEventListener() {
+            @Override
+            *//*public void onDataChange(DataSnapshot dataSnapshot) {
+                for (final DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    //System.out.println(postSnapshot.getKey());
+                    //TimeUnit.SECONDS.to;
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Do something after 5s = 5000ms
+                            //buttons[inew][jnew].setBackgroundColor(Color.BLACK);
+                            Student student = postSnapshot.getValue(Student.class);
+                            if (student.match) {
+                                //student.match = true;
+                                mDatabase.child(student.username).child("match").setValue(false);
+                                System.out.println(student.match);
+                                //break;
+                            }
+                        }
+                    }, 5000);
+
+
+                    *//**//*try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        continue;
+                    }*//**//*
+                }
+               *//**//* int count = 0;
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    count++;
+                    if (count == 1) {
+                        //String student = postSnapshot.getKey(); //students.limitToFirst(1).toString();
+                        System.out.print(postSnapshot.getKey());
+                        break;
+                    }
+                }*//**//*
+            }
+
+*//*
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                 // ...
-            }
+            }*/
 
 
 
-        });
+        //});
         String nameToString= students.limitToFirst(1).toString();
         System.out.println(nameToString);
         //System.out.println(students);
