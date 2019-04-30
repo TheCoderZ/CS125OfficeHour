@@ -2,7 +2,7 @@ package com.example.cs125officehours;
 
 public class Staff {
     public String username;
-    public String email;
+    public static String email;
     public boolean match;
 
     public Staff() {
