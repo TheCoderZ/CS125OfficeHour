@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,11 +15,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONObject;
 
 public class StaffActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     public Button mButton;
+    EditText mEdit;
 
 
     private static final String TAG =
@@ -27,7 +28,7 @@ public class StaffActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mDatabase = FirebaseDatabase.getInstance().getReference("Student");
-
+        mEdit = (EditText)findViewById(R.id.editText);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ta_interface);
     }
@@ -45,7 +46,6 @@ public class StaffActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     System.out.println(postSnapshot.getKey());
-                    // TODO: handle the post
                 }
             }
 

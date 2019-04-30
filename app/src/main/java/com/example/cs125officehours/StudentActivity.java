@@ -33,6 +33,8 @@ public class StudentActivity extends AppCompatActivity {
                 name = mEdit.getText().toString();
                 writeNewStudent(name, name, name);
                 System.out.println("hello!");
+                TextView textView = findViewById(R.id.textView2);
+                textView.setText("Looking for a TA/CA...");
             }
         });
     }

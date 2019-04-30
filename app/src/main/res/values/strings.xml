@@ -12,5 +12,6 @@
     <string name="request_TA">REQUEST A TA</string>
     <string name="go_back">Go Back</string>
     <string name="name">Name</string>
+    <string name="status">Status:</string>
 
 </resources>

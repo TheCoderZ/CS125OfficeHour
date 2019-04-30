@@ -69,8 +69,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mButton = (Button)findViewById(R.id.signIn);
         mButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                email = emailInput.getText().toString();
+
                 password = passwordInput.getText().toString();
+                writeNewUser(email, email);
+                //openStaff(view);
                 //writeNewStudent(name, name, name);
                 if (mAuth.signInWithEmailAndPassword(email, password).isSuccessful()) {
                     //Intent intent = new Intent(this, StaffActivity.class);
@@ -156,11 +158,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void openStaff(View view) {
         Intent intent = new Intent(this, StaffActivity.class);
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        email = emailInput.getText().toString();
+        System.out.println(email);
+        writeNewUser(email, email);
         startActivity(intent);
-        writeNewUser("zfaizal2", "Zayyan", "zfaizal2@illinois.edu");
+        //writeNewUser("zfaizal2", "Zayyan", "zfaizal2@illinois.edu");
     }
 
-    private void writeNewUser(String userId, String name, String email) {
+    private void writeNewUser(String userId, String name) {
         Staff user = new Staff(name, email);
 
         mDatabase.child("Staff").child(userId).setValue(user);
