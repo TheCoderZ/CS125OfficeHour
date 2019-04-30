@@ -61,13 +61,20 @@ public class StaffActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     //System.out.println(postSnapshot.getKey());
                     //TimeUnit.SECONDS.to;
-                    try {
+                    Student student = postSnapshot.getValue(Student.class);
+                    if (student.match) {
+                        continue;
+                    }
+                    student.match = true;
+                    mDatabase.child(student.username).child("match").setValue(true);
+                    System.out.println(student.match);
+                    /*try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
                         continue;
-                    }
+                    }*/
                 }
-                int count = 0;
+               /* int count = 0;
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     count++;
                     if (count == 1) {
@@ -75,7 +82,7 @@ public class StaffActivity extends AppCompatActivity {
                         System.out.print(postSnapshot.getKey());
                         break;
                     }
-                }
+                }*/
             }
 
 
