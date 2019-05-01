@@ -79,7 +79,7 @@ public class StaffActivity extends AppCompatActivity {
                         //System.out.println(mDatabase.child(student.username).toString());
                         //mDatabase.child("match").setValue(true);
                         try {
-                            mDatabase.child(postSnapshot.getKey()).setValue(true);
+                            //mDatabase.child(postSnapshot.getKey()).setValue(true);
                             mDatabase.child(postSnapshot.getKey()).child(student.username).child("match").setValue(true);
                         } catch (NullPointerException e) {
                             System.out.println(mDatabase.child(postSnapshot.getKey()));
@@ -90,7 +90,7 @@ public class StaffActivity extends AppCompatActivity {
                         //System.out.println(student.match);
                         textView.setText("Matched with: " + student.username);
                         textView.setVisibility(View.VISIBLE);
-                        //break;
+                        break;
                     }
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
