@@ -4,6 +4,7 @@ public class Student {
     public String username;
     public String email;
     public boolean match;
+    public String key;
 
     public Student() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)

@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.EventListener;
+
 public class StudentActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     public Button mButton;
@@ -55,24 +57,14 @@ public class StudentActivity extends AppCompatActivity {
     private void writeNewStudent(String userId, String name, String email) {
         user = new Student(name, email);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Student").child(userId).setValue(user);
-        mDatabase.orderByKey();
+        mDatabase.child("Student").push().child(userId).setValue(user);
+        user.key = mDatabase.child("Student").child(userId).push().getKey();
+        //mDatabase.push();
+        //mDatabase.orderByKey();
     }
 
     private void seek(String name) {
 
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //dbStudent = dataSnapshot.getValue(Student.class);
-                System.out.println(dataSnapshot.getValue());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        };
         //postListener.onDataChange();
         System.out.println(mDatabase.child("Student").child(name).child("match").addValueEventListener(postListener));
         //System.out.println(dbSt)

@@ -53,24 +53,44 @@ public class StaffActivity extends AppCompatActivity {
         //final Query students = mDatabase.snapshot;
         final Query students = mDatabase.orderByKey();
         //DataSnapshot something = students.
-        System.out.println("this works");
-        System.out.println(Staff.email);
+        //System.out.println("this works");
+        //System.out.println(Staff.email);
         //System.out.println(students);
         mButton = (Button)findViewById(R.id.ta_done);
         students.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (final DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    Student student = postSnapshot.getValue(Student.class);
-                    //System.out.println(postSnapshot.getKey());
+                    System.out.println(postSnapshot.getKey());
+                    System.out.println(postSnapshot.getValue());
+                    //postSnapshot.get
+                    Student student = postSnapshot.getChildren().iterator().next().getValue(Student.class);
+                            //getValue(Student.class);
+                    //System.out.println(student.toString());
+                    //System.out.println(student);
                     //TimeUnit.SECONDS.to;
+                    //System.out.println(student.match);
                     if (!student.match) {
                         //student.match = true;
-                        mDatabase.child(student.username).child("match").setValue(true);
-                        System.out.println(student.match);
+                        //String key = mDatabase.child(student.username).toString();
+                        //System.out.println(mDatabase.child(student.username).toString());
+                        //System.out.println(mDatabase.child(student.username).child("match"));
+                        //System.out.println(student.toString());
+                        //System.out.println(mDatabase.child(student.username).toString());
+                        //mDatabase.child("match").setValue(true);
+                        try {
+                            mDatabase.child(postSnapshot.getKey()).setValue(true);
+                            mDatabase.child(postSnapshot.getKey()).child(student.username).child("match").setValue(true);
+                        } catch (NullPointerException e) {
+                            System.out.println(mDatabase.child(postSnapshot.getKey()));
+                            System.out.println(student.username);
+                        }
+                        //System.out.println(student.key);
+
+                        //System.out.println(student.match);
                         textView.setText("Matched with: " + student.username);
                         textView.setVisibility(View.VISIBLE);
-                        break;
+                        //break;
                     }
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -160,7 +180,7 @@ public class StaffActivity extends AppCompatActivity {
 
         //});
         String nameToString= students.limitToFirst(1).toString();
-        System.out.println(nameToString);
+       // System.out.println(nameToString);
         //System.out.println(students);
         mButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
