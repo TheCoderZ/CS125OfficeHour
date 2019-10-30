@@ -74,8 +74,7 @@ public class StudentActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                TextView textView = findViewById(R.id.textView2);
-                textView.setText("matched");
+
             }
 
             @Override
@@ -85,7 +84,8 @@ public class StudentActivity extends AppCompatActivity {
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                TextView textView = findViewById(R.id.textView2);
+                textView.setText("matched");
             }
 
             @Override
